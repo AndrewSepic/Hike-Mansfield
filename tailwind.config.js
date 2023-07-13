@@ -14,7 +14,10 @@ module.exports = {
       },
 	  colors: {
 		'beige': '#e6e3c5',
-		
+		'dark-brown': '#654e39',
+	  },
+	  fontFamily: {
+		'heading': ['var(--font-lilita_one)'],
 	  }
     },
   },

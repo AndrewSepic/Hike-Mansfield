@@ -1,9 +1,20 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Lilita_One } from 'next/font/google'
 import Script from 'next/script'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
+// const caprasimo = Caprasimo({
+// 	weight: '400',
+// 	subsets: ['latin'],
+// 	display: 'swap',
+// 	variable: '--font-caprasimo',
+//   })
+const lilitaOne = Lilita_One({ 
+	subsets: ['latin'],
+	weight: '400',
+	variable: '--font-lilita_one',
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${lilitaOne.variable}`}>{children}</body>
     </html>
   )
 }
