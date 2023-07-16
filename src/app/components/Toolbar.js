@@ -3,11 +3,15 @@ import { BsArrowRight, BsArrowLeft } from 'react-icons/bs'
 import { useState } from 'react'
 
 const Toolbar = ({handleMapMove}) => {
-	console.log("toolbar loads")
 
 	const [ activePeak, setActivePeak ] = useState(0)
 	const [ nextPeak, setNextPeak ] = useState(1)
-
+	
+	const updateState = () => {
+		activePeak < threePeaks.length - 1 ? setActivePeak(activePeak + 1) : setActivePeak(0)
+		nextPeak < threePeaks.length - 1 ? setNextPeak(nextPeak + 1) : setNextPeak(0)
+	}
+	
 	const threePeaks = [
 		{
 			"name": "Mount Mansfield",
@@ -25,7 +29,8 @@ const Toolbar = ({handleMapMove}) => {
 			"description": "Vermont's 3rd tallest peak.",
 		}
 	]
-
+	
+	console.log(threePeaks.length)
 	return (
 		<div className="toolbar flex flex-col justify-between h-screen w-1/4 bg-beige z-50">
 
@@ -63,10 +68,11 @@ const Toolbar = ({handleMapMove}) => {
 				</button>
 
 				<button
-					className="bg-amber-50 text-green-700 py-4 px-6 flex basis-1/2 justify-center items-center hover:bg-amber-100"
-					onClick={() => 
+					className="bg-amber-50 text-green-700 py-4 px-6 flex basis-1/2 justify-center items-center transition-all hover:bg-amber-100"
+					onClick={() => {
 						handleMapMove(threePeaks[nextPeak].coordinates)
-					}>
+						updateState()
+					}}>
 						{threePeaks[nextPeak].name}
 						<BsArrowRight className="ml-2"></BsArrowRight>
 				</button>
