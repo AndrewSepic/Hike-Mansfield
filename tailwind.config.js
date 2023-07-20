@@ -15,6 +15,9 @@ module.exports = {
 	  colors: {
 		'beige': '#e6e3c5',
 		'dark-brown': '#654e39',
+		'light-brown': '#937d63',
+		'light-brown-text': '#f3ebdc'
+
 	  },
 	  fontFamily: {
 		'heading': ['var(--font-lilita_one)'],

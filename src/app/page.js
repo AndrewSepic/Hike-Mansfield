@@ -3,6 +3,7 @@ import mapboxGl from "mapbox-gl"
 import { useEffect, useRef } from 'react'
 import 'node_modules/mapbox-gl/src/css/mapbox-gl.css'
 import Toolbar from "./components/Toolbar"
+import mansfieldTrails from "./trails/mansfield-trail-lines.json"
 
 export default function Home() {
 
@@ -26,6 +27,36 @@ export default function Home() {
 			essential: true // This animation is considered essential with
 			//respect to prefers-reduced-motion
 		});
+	}
+
+	const handleLoadTrails = (activePeak) => {
+		const trails = mansfieldTrails
+		const sunsetRidgeCoords = trails.features[1].geometry.coordinates
+		console.log("sunset Ridge coordinates", sunsetRidgeCoords )
+		map.current.addSource('sunset-ridge', {
+			'type': 'geojson',
+			'data': {
+				'type': 'Feature',
+				'properties': {},
+				'geometry': {
+					'type': 'LineString',
+					'coordinates': sunsetRidgeCoords
+				}
+			}
+		})
+		map.current.addLayer({
+			'id': 'sunset-ridge',
+			'type': 'line',
+			'source': 'sunset-ridge',
+			'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+			'paint': {
+				'line-color': '#FFF',
+				'line-width': 6
+			}
+		})
 	}
 
 	function rotateCamera(timestamp) {
@@ -56,7 +87,7 @@ export default function Home() {
   return (
 	<div className="Wrapper flex">
 		
-		<Toolbar handleMapMove={handleMapMove}></Toolbar>
+		<Toolbar handleMapMove={handleMapMove} handleLoadTrails={handleLoadTrails}></Toolbar>
 
 		<div 
 			ref={mapContainer}

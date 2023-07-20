@@ -2,7 +2,7 @@ import { FaMountain } from 'react-icons/fa'
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs'
 import { useState } from 'react'
 
-const Toolbar = ({handleMapMove}) => {
+const Toolbar = ({handleMapMove, handleLoadTrails}) => {
 
 	const [ activePeak, setActivePeak ] = useState(0)
 	const [ nextPeak, setNextPeak ] = useState(1)
@@ -10,6 +10,11 @@ const Toolbar = ({handleMapMove}) => {
 	const updateState = () => {
 		activePeak < threePeaks.length - 1 ? setActivePeak(activePeak + 1) : setActivePeak(0)
 		nextPeak < threePeaks.length - 1 ? setNextPeak(nextPeak + 1) : setNextPeak(0)
+	}
+
+	function loadTrails() {
+		console.log("trails!")
+		handleLoadTrails(activePeak)
 	}
 	
 	const threePeaks = [
@@ -30,7 +35,6 @@ const Toolbar = ({handleMapMove}) => {
 		}
 	]
 	
-	console.log(threePeaks.length)
 	return (
 		<div className="toolbar flex flex-col justify-between h-screen w-1/4 bg-beige z-50">
 
@@ -52,23 +56,27 @@ const Toolbar = ({handleMapMove}) => {
 			</div>
 
 			<div
-				className="toolbar-body p-6 grow">
+				className="toolbar-body p-6 grow flex flex-col">
 
-				<h3 className="font-heading text-lg text-dark-brown">{threePeaks[activePeak].description}</h3>
+				<h3 className="font-heading text-lg text-dark-brown w-full">{threePeaks[activePeak].description}</h3>
 
+				<button
+					className="bg-light-brown text-light-brown-text py-3 px-4 m-2 flex rounded justify-center items-center transition-all hover:bg-dark-brown"
+					onClick={loadTrails}
+					>Load Trails...</button>
 
 			</div>
 
 			<div className="navBar w-full flex flex-row">
 				<button
-					className="flex basis-1/2 bg-slate-300 justify-center items-center text-slate-500 py-4 px-6"
+					className="flex rounded basis-1/2 bg-slate-300 justify-center items-center text-slate-500 py-4 px-4 m-2"
 					disabled={activePeak == 0 ? true : false}>
 					<BsArrowLeft className="mr-2"></BsArrowLeft>
 					Prev Mountain
 				</button>
 
 				<button
-					className="bg-amber-50 text-green-700 py-4 px-6 flex basis-1/2 justify-center items-center transition-all hover:bg-amber-100"
+					className="bg-green-700 text-amber-50 py-3 px-4 m-2 flex rounded basis-1/2 justify-center items-center transition-all hover:bg-amber-100"
 					onClick={() => {
 						handleMapMove(threePeaks[nextPeak].coordinates)
 						updateState()
