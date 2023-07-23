@@ -1,8 +1,9 @@
 import { FaMountain } from 'react-icons/fa'
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs'
 import { useState } from 'react'
+import TrailListing from './TrailListing'
 
-const Toolbar = ({handleMapMove, handleLoadTrails}) => {
+const Toolbar = ({handleMapMove, mapRef}) => {
 
 	const [ activePeak, setActivePeak ] = useState(0)
 	const [ nextPeak, setNextPeak ] = useState(1)
@@ -10,11 +11,6 @@ const Toolbar = ({handleMapMove, handleLoadTrails}) => {
 	const updateState = () => {
 		activePeak < threePeaks.length - 1 ? setActivePeak(activePeak + 1) : setActivePeak(0)
 		nextPeak < threePeaks.length - 1 ? setNextPeak(nextPeak + 1) : setNextPeak(0)
-	}
-
-	function loadTrails() {
-		console.log("trails!")
-		handleLoadTrails(activePeak)
 	}
 	
 	const threePeaks = [
@@ -38,7 +34,7 @@ const Toolbar = ({handleMapMove, handleLoadTrails}) => {
 	return (
 		<div className="toolbar flex flex-col justify-between h-screen w-1/4 bg-beige z-50">
 
-			<div className="Banner flex justify-start mt-16 ">
+			<div className="Banner flex justify-start mt-8 ">
 				<div className="relative w-full">
 					<h2 className=" text-amber-50 font-heading bg-green-700 py-4 px-8  text-[2rem] flex items-center"><FaMountain className="mr-4"></FaMountain>{threePeaks[activePeak].name}</h2>
 					<div className="
@@ -56,14 +52,11 @@ const Toolbar = ({handleMapMove, handleLoadTrails}) => {
 			</div>
 
 			<div
-				className="toolbar-body p-6 grow flex flex-col">
+				className="toolbar-body p-6 grow flex flex-col overflow-auto">
 
 				<h3 className="font-heading text-lg text-dark-brown w-full">{threePeaks[activePeak].description}</h3>
 
-				<button
-					className="bg-light-brown text-light-brown-text py-3 px-4 m-2 flex rounded justify-center items-center transition-all hover:bg-dark-brown"
-					onClick={loadTrails}
-					>Load Trails...</button>
+				<TrailListing activePeak={activePeak} mapRef={mapRef}></TrailListing>
 
 			</div>
 
@@ -78,7 +71,7 @@ const Toolbar = ({handleMapMove, handleLoadTrails}) => {
 				<button
 					className="bg-green-700 text-amber-50 py-3 px-4 m-2 flex rounded basis-1/2 justify-center items-center transition-all hover:bg-amber-100"
 					onClick={() => {
-						handleMapMove(threePeaks[nextPeak].coordinates)
+						handleMapMove(threePeaks[nextPeak].coordinates),
 						updateState()
 					}}>
 						{threePeaks[nextPeak].name}
