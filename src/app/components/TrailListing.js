@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import mansfieldTrails from "../trails/mansfield-trail-lines.json"
 import Trail from './Trail'
+import createTrails from '../utils/mapbox-functions'
 
 
 const TrailListing = ({activePeak, mapRef }) => {
@@ -19,33 +20,10 @@ const TrailListing = ({activePeak, mapRef }) => {
 			trailsArray = mansfieldTrails.features
 			setTrails(mansfieldTrails.features)
 		}
-		const sunsetRidgeCoords = trailsArray[1].geometry.coordinates
-		console.log(sunsetRidgeCoords)
-		console.log(trailsArray.length)
-		mapRef.current.addSource('sunset-ridge', {
-			'type': 'geojson',
-			'data': {
-				'type': 'Feature',
-				'properties': {},
-				'geometry': {
-					'type': 'LineString',
-					'coordinates': sunsetRidgeCoords
-				}
-			}
-		})
-		mapRef.current.addLayer({
-			'id': 'sunset-ridge',
-			'type': 'line',
-			'source': 'sunset-ridge',
-			'layout': {
-				'line-join': 'round',
-				'line-cap': 'round'
-			},
-			'paint': {
-				'line-color': '#FFF',
-				'line-width': 6
-			}
-		})
+
+		// Mapbox magic happens here
+		createTrails(trailsArray, mapRef)
+	
 		setTrailsAreLoaded(true)
 	}
 
@@ -55,9 +33,9 @@ const TrailListing = ({activePeak, mapRef }) => {
 		{(trailsAreLoaded) ? (
 			<div className="flex flex-col">
 				<h2 className="font-heading w-full border-b-4 border-dark-brown text-dark-brown text-2xl mb-4">Trails</h2>
-				{trails.map((trail) => {
+				{trails.map((trail, index) => {
 					return (
-						<Trail trailData={trail}></Trail>
+						<Trail key={index} trailData={trail}></Trail>
 					)
 				})}
 			</div>

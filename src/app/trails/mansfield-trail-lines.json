@@ -18,8 +18,7 @@
 		  "WIDE": null,
 		  "ELEVMAX": 2952,
 		  "ELEVMIN": 2910,
-		  "GRADEAVG": 28,
-		  "PAINT": "#14b8a6"
+		  "GRADEAVG": 28
 		},
 		"geometry": {
 		  "type": "LineString",
@@ -125,8 +124,7 @@
 		  "WIDE": null,
 		  "ELEVMAX": 4247,
 		  "ELEVMIN": 2314,
-		  "GRADEAVG": 25,
-		  "PAINT": "#38bdf8"
+		  "GRADEAVG": 25
 		},
 		"geometry": {
 		  "type": "LineString",
@@ -1788,8 +1786,7 @@
 		  "WIDE": 1,
 		  "ELEVMAX": 2433,
 		  "ELEVMIN": 1845,
-		  "GRADEAVG": 11,
-		  "PAINT": "#4ade80"
+		  "GRADEAVG": 11
 		},
 		"geometry": {
 		  "type": "LineString",
