@@ -18,12 +18,10 @@ const TrailListing = ({activePeak, mapRef }) => {
 		let trailsArray = {}
 		if(activePeak == 0) {
 			trailsArray = mansfieldTrails.features
-			setTrails(mansfieldTrails.features)
 		}
-
-		// Mapbox magic happens here
-		createTrails(trailsArray, mapRef)
-	
+		// Mapbox magic happens here - Creates trails & returns array of trails with generated colors
+		const trailData = createTrails(trailsArray, mapRef)
+		setTrails(trailData)
 		setTrailsAreLoaded(true)
 	}
 

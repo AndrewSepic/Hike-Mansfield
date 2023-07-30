@@ -6753,7 +6753,7 @@
 	  {
 		"type": "Feature",
 		"properties": {
-		  "Name": "Maple Ridge Trail",
+		  "Name": "Maple Ridge Trail 2",
 		  "DISTANCE": 0.86,
 		  "PED": 1,
 		  "XCSKI": null,
@@ -11823,7 +11823,7 @@
 	  {
 		"type": "Feature",
 		"properties": {
-		  "Name": "CCC Road",
+		  "Name": "CCC Road 2",
 		  "DISTANCE": 0.89,
 		  "PED": 1,
 		  "XCSKI": null,

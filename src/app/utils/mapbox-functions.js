@@ -1,7 +1,5 @@
 const createTrails = ( arrayOfTrails, mapRef ) => {
 
-	//const sunsetRidgeCoords = arrayOfTrails[1].geometry.coordinates
-	console.log(arrayOfTrails.length)
 	console.log(arrayOfTrails)
 
 	arrayOfTrails.forEach(element => {
@@ -9,7 +7,9 @@ const createTrails = ( arrayOfTrails, mapRef ) => {
 		trailName = trailName.replace(' ', '-').toLowerCase()
 		console.log(trailName) 
 		let coords = element.geometry.coordinates 
-		var randomColor = (Math.floor(Math.random() * 2 ** 24)).toString(16).padStart(0, 6);
+		var randomColor = Math.random().toString(16).slice(2, 8).padEnd(6,0)
+		// places the random color into the trail element
+		element.properties.paint = randomColor
 		console.log(randomColor)
 
 		mapRef.current.addSource(trailName, {
@@ -33,15 +33,14 @@ const createTrails = ( arrayOfTrails, mapRef ) => {
 			},
 			'paint': {
 				'line-color': `#${randomColor}`,
-				'line-width': 6
+				'line-width': 4
 			}
 		})
 		
 	});
 
-	
-
-
+	// Return trails array with random colors assigned to each trail. 
+	return arrayOfTrails
 
 }
 
