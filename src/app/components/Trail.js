@@ -10,8 +10,8 @@ const Trail = ({trailData}) => {
 			</div>
 			<div className="content flex flex-wrap justify-between">
 				<span className="p2 w-1/2 text-xs text-dark-brown">Distance: {trailData.properties.DISTANCE} miles</span>
-				<span className="p2 w-1/2 text-xs text-dark-brown">Elevation Max: {trailData.properties.ELEVMAX}'</span>
-				<span className="p2 w-1/2 text-xs text-dark-brown">Elevation Min: {trailData.properties.ELEVMIN}'</span>
+				<span className="p2 w-1/2 text-xs text-dark-brown">Elevation Max: {trailData.properties.ELEVMAX}&apos;</span>
+				<span className="p2 w-1/2 text-xs text-dark-brown">Elevation Min: {trailData.properties.ELEVMIN}&apos;</span>
 				<span className="p2 w-1/2 text-xs text-dark-brown">Average Grade: {trailData.properties.GRADEAVG}</span>
 			</div>
 			
