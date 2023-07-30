@@ -15,19 +15,24 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 	
 	const threePeaks = [
 		{
-			"name": "Mount Mansfield",
-			"coordinates": [-72.815438, 44.542950],
-			"description": "Vermont's tallest peak.",
+			name: "Mount Mansfield",
+			coordinates: [-72.815438, 44.542950],
+			description: "Vermont's tallest peak.",
 		},
 		{
-			"name": "Camel's Hump",
-			"coordinates":  [-72.886339, 44.320417],
-			"description": "Vermont's 2nd tallest peak.",
+			name: "Camel's Hump",
+			coordinates:  [-72.886339, 44.320417],
+			description: "Vermont's 3rd Tallest Peak & Most Unusual .",
 		},
 		{
-			"name": "Mount Hunger",
-			"coordinates": [-72.645089, 44.395528],
-			"description": "Vermont's 3rd tallest peak.",
+			name: "Killington Peak",
+			coordinates: [-72.820187, 43.604794],
+			description: "Vermont's 2nd tallest peak.",
+		},
+		{
+			name: "Mount Ellen",
+			coordinates: [-72.928735, 44.159853],
+			description: "Tied for Vermont's 3rd Tallest Peak"
 		}
 	]
 	

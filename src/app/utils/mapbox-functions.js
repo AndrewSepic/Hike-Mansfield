@@ -5,12 +5,12 @@ const createTrails = ( arrayOfTrails, mapRef ) => {
 	arrayOfTrails.forEach(element => {
 		let trailName = element.properties.Name
 		trailName = trailName.replace(' ', '-').toLowerCase()
-		console.log(trailName) 
+		// console.log(trailName) 
 		let coords = element.geometry.coordinates 
 		var randomColor = Math.random().toString(16).slice(2, 8).padEnd(6,0)
 		// places the random color into the trail element
 		element.properties.paint = randomColor
-		console.log(randomColor)
+		// console.log(randomColor)
 
 		mapRef.current.addSource(trailName, {
 			'type': 'geojson',

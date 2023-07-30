@@ -4,7 +4,7 @@ const Trail = ({trailData}) => {
 		<div className="p-2 bg-[#d9cfaf] rounded w-full my-2 hover:bg-[#fffcf0] transition-all cursor-pointer">
 			<div className="Header w-full flex items-center">
 				<span 
-				className="swatch h-4 w-4 inline-block border-white border-2 rounded mr-1"
+				className="swatch h-4 w-4 inline-block border-white border-2 rounded mr-2"
 				style={{backgroundColor: '#' + trailData.properties.paint}}></span>
 				<h3 className="font-heading text-light-brown text-xl">{trailData.properties.Name}</h3>
 			</div>

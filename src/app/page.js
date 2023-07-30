@@ -1,8 +1,9 @@
 'use client'
 import mapboxGl from "mapbox-gl"
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import 'node_modules/mapbox-gl/src/css/mapbox-gl.css'
 import Toolbar from "./components/Toolbar"
+import MapToolView from "./components/MapToolView"
 
 export default function Home() {
 
@@ -10,9 +11,15 @@ export default function Home() {
 	const map = useRef(null)
 	mapboxGl.accessToken = 'pk.eyJ1IjoiYW5kcmV3c2VwaWMiLCJhIjoiY2xqdGJldGo0MHJoeTNtbWlnYW92dG85bCJ9.t0xMbigo5pFzlRzCBTsw-A';
 
+	const [ long, setLong ] = useState(0)
+	const [ lat, setLat ] = useState(0)
+	const [ zoom, setZoom ] = useState(15)
+	const [ pitch, setPitch ] = useState(75)
+	const [ bearing, setBearing ] = useState(135.2)
+
 	const destinationMountain = {
-		zoom: 15,
-		bearing: 135.2,
+		zoom: 16.07,
+		bearing: 99.68,
 		pitch: 75
 	}
 
@@ -44,20 +51,29 @@ export default function Home() {
 			container: mapContainer.current, // useRef
 			projection: 'globe',
 			style: 'mapbox://styles/andrewsepic/cljtdab1j019v01qu8bxj3db9',
-			center: [-72.815438, 44.542950],
-			pitch: 75,
-			bearing: 135.2,
-			zoom: 15, // starting zoom
+			center: [-72.8179, 44.5337],
+			pitch: 80,
+			bearing: 124,
+			zoom: 14.25, // starting zoom
 		});
 
 		map.current.once('idle', () => {
 			//rotateCamera(0);
 		})
+
+		map.current.on('move', () => {
+			setLong(map.current.getCenter().lng.toFixed(4))
+			setLat(map.current.getCenter().lat.toFixed(4))
+			setZoom(map.current.getZoom().toFixed(2))
+			setPitch(map.current.getPitch().toFixed(2))
+			setBearing(map.current.getBearing().toFixed(2))
+		});
 	})
   return (
 	<div className="Wrapper flex">
 		
 		<Toolbar handleMapMove={handleMapMove} mapRef={map}></Toolbar>
+		<MapToolView long={long} lat={lat} zoom={zoom} pitch={pitch} bearing={bearing}></MapToolView>
 
 		<div 
 			ref={mapContainer}

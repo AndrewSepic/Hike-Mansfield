@@ -13,5 +13,27 @@
 }
 
 body {
+	.trailListing-enter {
+		opacity: 0;
+	  }
+	.trailListing-enter-active {
+		opacity: 1;
+		transition: opacity 300ms;
+	}
+	.trailListing-exit {
+		opacity: 1;
+	}
+	.trailListing-exit-active {
+		opacity: 0;
+		transition: opacity 300ms;
+	}
 
+}
+.animate-wait {
+	opacity: 0;
+	margin-top: -50px;
+}
+.animate-finished {
+	opacity: 1;
+	margin-top: 0;
 }
