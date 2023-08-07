@@ -9729,6 +9729,15 @@
 		  "ELEVMIN": 3830,
 		  "GRADEAVG": 14
 		},
+		"cameraView": {
+			"center": [
+			  "-72.8158",
+			  "44.5303"
+			],
+			"zoom": "15.84",
+			"pitch": "68.24",
+			"bearing": "-77.61"
+		  },
 		"geometry": {
 		  "type": "LineString",
 		  "coordinates": [
