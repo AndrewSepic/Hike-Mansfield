@@ -54,16 +54,26 @@ const TrailListing = ({activePeak, mapRef }) => {
 		setActiveTrail(trailData.properties.Name)
 		const cameraView = trailData.cameraView
 		const start = trailData.geometry.coordinates[0]
-		console.log("start is",start)
 		const length = trailData.geometry.coordinates.length
 		const end = trailData.geometry.coordinates[length - 1]
-		console.log("end is", end)
 
-		mapRef.current.flyTo({
-			...cameraView,
-			duration: 4000,
-			essential: true,
-		})
+		if(cameraView == null || undefined) {
+			console.log("no camera view is set")
+			let centerOfTrail = trailData.geometry.coordinates[Math.round(length / 2)]
+			mapRef.current.flyTo({
+				center: centerOfTrail,
+				duration: 4000,
+				essential: true,
+			})
+		} else {
+			mapRef.current.flyTo({
+				...cameraView,
+				duration: 4000,
+				essential: true,
+			})
+		}
+
+		
 		// const trailId = trailData.properties.Name.replace(' ', '-').toLowerCase()
 
 		// mapRef.current.addLayer({
@@ -98,11 +108,11 @@ const TrailListing = ({activePeak, mapRef }) => {
 			
 			const elevationStart = Math.floor(mapRef.current.queryTerrainElevation(start)); 
 			// Update the popup altitude value and marker location - elevation returned in meters
-			popupStart.setHTML('Start Altitude: ' + (elevationStart * 3.28084).toFixed(0) + ' ft<br/>');
+			popupStart.setHTML('Altitude: ' + (elevationStart * 3.28084).toFixed(0) + ' ft<br/>');
 
 			const elevationEnd = Math.floor(mapRef.current.queryTerrainElevation(end)); 
 			// Update the popup altitude value and marker location - elevation returned in meters, so multiplyby 3.28..
-			popupEnd.setHTML('End Altitude: ' + (elevationEnd * 3.28084).toFixed(0) + ' ft<br/>');
+			popupEnd.setHTML('Altitude: ' + (elevationEnd * 3.28084).toFixed(0) + ' ft<br/>');
 		
 		const trailEnd = new mapboxGl.Marker({
 				color: 'red',
