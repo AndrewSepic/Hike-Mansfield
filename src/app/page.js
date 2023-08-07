@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import 'node_modules/mapbox-gl/src/css/mapbox-gl.css'
 import Toolbar from "./components/Toolbar"
 import MapToolView from "./components/MapToolView"
+import TestComponent from "./components/TestComponent"
 
 export default function Home() {
 
@@ -16,6 +17,7 @@ export default function Home() {
 	const [ zoom, setZoom ] = useState(15)
 	const [ pitch, setPitch ] = useState(75)
 	const [ bearing, setBearing ] = useState(135.2)
+	const [ mapMoving, setMapMoving ] = useState(false)
 
 	const destinationMountain = {
 		zoom: 16.07,
@@ -26,22 +28,28 @@ export default function Home() {
 	const handleMapMove = (coordinates) => {
 		destinationMountain.center = coordinates
 		console.log(destinationMountain);
-		map.current.stop() // Doesn't stop the rotate
+		stopCameraRotate()
 		map.current.flyTo({
 			...destinationMountain, // Fly to the selected target
-			duration: 8000, // Animate over 12 seconds
+			duration: 12000, // Animate over 12 seconds
 			essential: true // This animation is considered essential with
 			//respect to prefers-reduced-motion
 		});
 	}
 
+	var animateRotation
 
 	function rotateCamera(timestamp) {
 		// clamp the rotation between 0 -360 degrees
 		// Divide timestamp by 100 to slow rotation to ~10 degrees / sec
 		map.current.rotateTo((timestamp / 200) % 360, { duration: 0 });
 		// Request the next frame of the animation.
-		requestAnimationFrame(rotateCamera);
+		animateRotation = requestAnimationFrame(rotateCamera);
+	}
+
+	function stopCameraRotate() {
+		console.log("Runs")
+		cancelAnimationFrame(animateRotation)
 	}
 
 
@@ -58,7 +66,7 @@ export default function Home() {
 		});
 
 		map.current.once('idle', () => {
-			//rotateCamera(0);
+			//animateRotation = rotateCamera(135.2)
 		})
 
 		map.current.on('move', () => {

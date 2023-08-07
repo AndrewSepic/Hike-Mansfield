@@ -74,7 +74,7 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 				</button>
 
 				<button
-					className="bg-green-700 text-amber-50 py-3 px-4 m-2 flex rounded basis-1/2 justify-center items-center transition-all hover:bg-amber-100"
+					className="bg-green-700 text-amber-50 py-3 px-4 m-2 flex rounded basis-1/2 justify-center items-center transition-all hover:bg-[#1f5b35]"
 					onClick={() => {
 						handleMapMove(threePeaks[nextPeak].coordinates),
 						updateState()

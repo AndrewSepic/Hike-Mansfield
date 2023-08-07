@@ -21,7 +21,11 @@ module.exports = {
 	  },
 	  fontFamily: {
 		'heading': ['var(--font-lilita_one)'],
-	  }
+	  },
+	  boxShadow: {
+		hard: '0px 10px 0px -3px #15803d, 0 10px 0px -3px #15803d'
+	  },
+
     },
   },
   plugins: [],

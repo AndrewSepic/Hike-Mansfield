@@ -1,7 +1,5 @@
 const createTrails = ( arrayOfTrails, mapRef ) => {
 
-	console.log(arrayOfTrails)
-
 	arrayOfTrails.forEach(element => {
 		let trailName = element.properties.Name
 		trailName = trailName.replace(' ', '-').toLowerCase()
@@ -12,30 +10,34 @@ const createTrails = ( arrayOfTrails, mapRef ) => {
 		element.properties.paint = randomColor
 		// console.log(randomColor)
 
-		mapRef.current.addSource(trailName, {
-			'type': 'geojson',
-			'data': {
-				'type': 'Feature',
-				'properties': {},
-				'geometry': {
-					'type': 'LineString',
-					'coordinates': coords
+		setTimeout(() => {
+			mapRef.current.addSource(trailName, {
+				'type': 'geojson',
+				'data': {
+					'type': 'Feature',
+					'properties': {},
+					'geometry': {
+						'type': 'LineString',
+						'coordinates': coords
+					}
 				}
-			}
-		})
-		mapRef.current.addLayer({
-			'id': trailName,
-			'type': 'line',
-			'source': trailName,
-			'layout': {
-				'line-join': 'round',
-				'line-cap': 'round'
-			},
-			'paint': {
-				'line-color': `#${randomColor}`,
-				'line-width': 4
-			}
-		})
+			})
+			mapRef.current.addLayer({
+				'id': trailName,
+				'type': 'line',
+				'source': trailName,
+				'layout': {
+					'line-join': 'round',
+					'line-cap': 'round'
+				},
+				'paint': {
+					'line-color': `#${randomColor}`,
+					'line-width': 4
+				}
+			})
+		}, 500)
+
+		
 		
 	});
 

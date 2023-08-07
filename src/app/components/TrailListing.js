@@ -1,27 +1,33 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import mansfieldTrails from "../trails/mansfield-trail-lines.json"
 import Trail from './Trail'
 import createTrails from '../utils/mapbox-functions'
-import { CSSTransition } from "react-transition-group"
+import mapboxGl from "mapbox-gl"
 
 
 const TrailListing = ({activePeak, mapRef }) => {
+	console.log("trailsLIsting loads")
 
 	const [ trailsAreLoaded, setTrailsAreLoaded ] = useState(false)
 	const [ trails, setTrails ] = useState(false)
 	const [ animationComplete, setAnimationComplete ] = useState(false)
-	const nodeRef = useRef(null)
+	const [ activeTrail, setActiveTrail ] = useState(null)
+	const [ trailMarkers, setTrailMarkers ] = useState([])
 
 	useEffect(()=> {
 		setTrailsAreLoaded(false)
 	}, [activePeak])
 
+	useEffect(() => {
+		// var trailStart = null
+		// var trailEnd = null
+		var counter = 0
+	}, [])
+
 	function animateIn() {
-		console.log("animation starts")
 		setTimeout(() => {
-			setAnimationComplete(true),
-			console.log("animation is finished")
-		}, 0)
+			setAnimationComplete(true)
+		}, 100)
 	}
 
 	function loadTrails() {
@@ -36,6 +42,84 @@ const TrailListing = ({activePeak, mapRef }) => {
 		animateIn()
 	}
 
+	function flyToTrail(trailData) {
+	
+		if(trailMarkers.length > 0 ) {
+			console.log("trail marker remove is happening")
+			trailMarkers.forEach((marker) => {
+				marker.remove()
+			})
+		}
+		// set State
+		setActiveTrail(trailData.properties.Name)
+		const cameraView = trailData.cameraView
+		const start = trailData.geometry.coordinates[0]
+		console.log("start is",start)
+		const length = trailData.geometry.coordinates.length
+		const end = trailData.geometry.coordinates[length - 1]
+		console.log("end is", end)
+
+		mapRef.current.flyTo({
+			...cameraView,
+			duration: 4000,
+			essential: true,
+		})
+		// const trailId = trailData.properties.Name.replace(' ', '-').toLowerCase()
+
+		// mapRef.current.addLayer({
+		// 	'id': trailId +'Active',
+		// 	'type': 'line',
+		// 	'source': trailId,
+		// 	'layout': {
+		// 		'line-join': 'round',
+		// 		'line-cap': 'round'
+		// 	},
+		// 	'paint': {
+		// 		'line-color': '#FFFFFF',
+		// 		'line-width': 6
+		// 	}
+
+		// }, trailId )
+
+		const popupStart = new mapboxGl.Popup({ closeButton: false });
+		const popupEnd = new mapboxGl.Popup({ closeButton: false });
+
+		const trailStart = new mapboxGl.Marker({
+				color: 'red',
+				scale: 0.8,
+				draggable: false,
+				pitchAlignment: 'auto',
+				rotationAlignment: 'auto'
+			})
+			.setLngLat(start)
+			.setPopup(popupStart)
+			.addTo(mapRef.current)
+			.togglePopup();
+			
+			const elevationStart = Math.floor(mapRef.current.queryTerrainElevation(start)); 
+			// Update the popup altitude value and marker location - elevation returned in meters
+			popupStart.setHTML('Start Altitude: ' + (elevationStart * 3.28084).toFixed(0) + ' ft<br/>');
+
+			const elevationEnd = Math.floor(mapRef.current.queryTerrainElevation(end)); 
+			// Update the popup altitude value and marker location - elevation returned in meters, so multiplyby 3.28..
+			popupEnd.setHTML('End Altitude: ' + (elevationEnd * 3.28084).toFixed(0) + ' ft<br/>');
+		
+		const trailEnd = new mapboxGl.Marker({
+				color: 'red',
+				scale: 0.8,
+				draggable: false,
+				pitchAlignment: 'auto',
+				rotationAlignment: 'auto'
+			})
+			.setLngLat(end)
+			.setPopup(popupEnd)
+			.addTo(mapRef.current)
+			.togglePopup();
+
+		const tempArray = [trailStart, trailEnd]
+		setTrailMarkers(tempArray)
+	}
+
 
 	return (
 		<>
@@ -45,7 +129,12 @@ const TrailListing = ({activePeak, mapRef }) => {
 				<h2 className="font-heading w-full border-b-4 border-dark-brown text-dark-brown text-2xl mb-4">Trails</h2>
 					{trails.map((trail, index) => {
 						return (
-							<Trail key={index} trailData={trail}></Trail>
+							<Trail 
+								key={index} 
+								trailData={trail}
+								handleClick={flyToTrail}
+								active={activeTrail}>
+							</Trail>
 						)
 					})}	
 			</div>

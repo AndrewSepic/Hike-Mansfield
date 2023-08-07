@@ -1,7 +1,14 @@
-const Trail = ({trailData}) => {
+import mapboxgl from "mapbox-gl"
+
+const Trail = ({trailData, handleClick, active}) => {
 
 	return (
-		<div className="p-2 bg-[#d9cfaf] rounded w-full my-2 hover:bg-[#fffcf0] transition-all cursor-pointer">
+		<div 
+			className={`${active == trailData.properties.Name ? 'bg-[#fffcf0] border-l-[16px] ml-3' : '' } p-2 bg-[#d9cfaf] rounded w-full my-2 hover:bg-[#fffcf0] transition-all cursor-pointer`}
+			style={{borderColor: '#' + trailData.properties.paint}}
+			onClick={() => {
+				handleClick(trailData)
+			}}>
 			<div className="Header w-full flex items-center">
 				<span 
 				className="swatch h-4 w-4 inline-block border-white border-2 rounded mr-2"
