@@ -5112,10 +5112,13 @@
 		  "GRADEAVG": 18
 		},
 		"cameraView": {
-			"center":[ -72.8178, 44.5335],
-			"zoom": 15.88,
-			"pitch": 72.88,
-			"bearing": 44.88
+			"center": [
+			  -72.8244,
+			  44.5178
+			],
+			"zoom":  15.37,
+			"pitch":  59.99,
+			"bearing":  49.60
 		},
 		"geometry": {
 		  "type": "LineString",

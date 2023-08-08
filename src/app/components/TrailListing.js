@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import mansfieldTrails from "../trails/mansfield-trail-lines.json"
+import camelsHumpTrails from "../trails/camels-hump-trails.json"
 import Trail from './Trail'
 import createTrails from '../utils/mapbox-functions'
+import { animateIn } from '../utils/AnimateIn'
 import mapboxGl from "mapbox-gl"
 
 
 const TrailListing = ({activePeak, mapRef }) => {
-	console.log("trailsLIsting loads")
 
 	const [ trailsAreLoaded, setTrailsAreLoaded ] = useState(false)
 	const [ trails, setTrails ] = useState(false)
@@ -16,6 +17,7 @@ const TrailListing = ({activePeak, mapRef }) => {
 
 	useEffect(()=> {
 		setTrailsAreLoaded(false)
+		setAnimationComplete(false)
 	}, [activePeak])
 
 	useEffect(() => {
@@ -24,22 +26,18 @@ const TrailListing = ({activePeak, mapRef }) => {
 		var counter = 0
 	}, [])
 
-	function animateIn() {
-		setTimeout(() => {
-			setAnimationComplete(true)
-		}, 100)
-	}
-
 	function loadTrails() {
 		let trailsArray = {}
 		if(activePeak == 0) {
 			trailsArray = mansfieldTrails.features
+		} else if (activePeak == 1) {
+			trailsArray = camelsHumpTrails.features
 		}
 		// Mapbox magic happens here - Creates trails & returns array of trails with generated colors
 		const trailData = createTrails(trailsArray, mapRef)
 		setTrails(trailData)
 		setTrailsAreLoaded(true)
-		animateIn()
+		animateIn(0, setAnimationComplete)
 	}
 
 	function flyToTrail(trailData) {
@@ -135,7 +133,7 @@ const TrailListing = ({activePeak, mapRef }) => {
 		<>
 		{(trailsAreLoaded) ? (
 			
-			<div className={`flex flex-col transition-all ease-in-out duration-500 ${animationComplete ? "animate-finished" : "animate-wait"}`}>
+			<div className={`flex flex-col transition-all ease-in-out duration-500 ${animationComplete ? "animate-finished" : "animate-wait-top"}`}>
 				<h2 className="font-heading w-full border-b-4 border-dark-brown text-dark-brown text-2xl mb-4">Trails</h2>
 					{trails.map((trail, index) => {
 						return (

@@ -29,11 +29,18 @@ body {
 	}
 
 }
-.animate-wait {
+.animate-wait-top {
 	opacity: 0;
 	margin-top: -50px;
 }
+
+.animate-wait-right {
+	opacity: 0;
+	margin-right: -50px;
+}
+
 .animate-finished {
 	opacity: 1;
 	margin-top: 0;
+	margin-right: 0;
 }

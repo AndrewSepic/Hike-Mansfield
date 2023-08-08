@@ -19,18 +19,10 @@ export default function Home() {
 	const [ bearing, setBearing ] = useState(135.2)
 	const [ mapMoving, setMapMoving ] = useState(false)
 
-	const destinationMountain = {
-		zoom: 16.07,
-		bearing: 99.68,
-		pitch: 75
-	}
-
 	const handleMapMove = (coordinates) => {
-		destinationMountain.center = coordinates
-		console.log(destinationMountain);
 		stopCameraRotate()
 		map.current.flyTo({
-			...destinationMountain, // Fly to the selected target
+			...coordinates, // Fly to the selected target
 			duration: 12000, // Animate over 12 seconds
 			essential: true // This animation is considered essential with
 			//respect to prefers-reduced-motion

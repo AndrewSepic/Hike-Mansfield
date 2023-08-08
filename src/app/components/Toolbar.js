@@ -21,8 +21,16 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 		},
 		{
 			name: "Camel's Hump",
-			coordinates:  [-72.886339, 44.320417],
-			description: "Vermont's 3rd Tallest Peak & Most Unusual .",
+			cameraView: {
+				center: [
+				  -72.8910,
+				  44.3190
+				],
+				zoom:  15.54,
+				pitch:  72.98,
+				bearing:  62.90
+			},
+			description: "Vermont's 3rd Tallest Peak renown for it's saddle like appearance.",
 		},
 		{
 			name: "Killington Peak",
@@ -76,7 +84,7 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 				<button
 					className="bg-green-700 text-amber-50 py-3 px-4 m-2 flex rounded basis-1/2 justify-center items-center transition-all hover:bg-[#1f5b35]"
 					onClick={() => {
-						handleMapMove(threePeaks[nextPeak].coordinates),
+						handleMapMove(threePeaks[nextPeak].cameraView),
 						updateState()
 					}}>
 						{threePeaks[nextPeak].name}
