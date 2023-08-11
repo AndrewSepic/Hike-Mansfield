@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import mansfieldTrails from "../trails/mansfield-trail-lines.json"
 import camelsHumpTrails from "../trails/camels-hump-trails.json"
 import Trail from './Trail'
-import createTrails from '../utils/mapbox-functions'
-import { animateIn } from '../utils/AnimateIn'
+import createTrails from "../utils/mapbox-functions"
+import animateIn  from "../utils/animateIn"
 import mapboxGl from "mapbox-gl"
 
 

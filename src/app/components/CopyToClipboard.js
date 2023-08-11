@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { MdContentCopy } from "react-icons/md"
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { animateIn } from "../utils/AnimateIn"
+import { CopyToClipboard } from "react-copy-to-clipboard"
+import animateIn from "../utils/animateIn"
 import { useEffect } from "react"
 
 const CopyToClipboardComponent = ({cameraAngle, setCameraShot }) => {
