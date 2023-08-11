@@ -16,7 +16,12 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 	const threePeaks = [
 		{
 			name: "Mount Mansfield",
-			coordinates: [-72.815438, 44.542950],
+			cameraView: {
+				center: [-72.8179, 44.5337],
+				pitch: 80,
+				bearing: 124,
+				zoom: 14.25, // starting zoom
+			},
 			description: "Vermont's tallest peak.",
 		},
 		{
@@ -34,18 +39,28 @@ const Toolbar = ({handleMapMove, mapRef}) => {
 		},
 		{
 			name: "Killington Peak",
-			coordinates: [-72.820187, 43.604794],
+			cameraView: {
+				center: [-72.820187, 43.604794],
+				zoom:  15.54,
+				pitch:  72.98,
+				bearing:  62.90 
+			},
 			description: "Vermont's 2nd tallest peak.",
 		},
 		{
 			name: "Mount Ellen",
-			coordinates: [-72.928735, 44.159853],
+			cameraView: {
+				center: [-72.928735, 44.159853],
+				zoom:  15.54,
+				pitch:  72.98,
+				bearing:  62.90 
+			},
 			description: "Tied for Vermont's 3rd Tallest Peak"
 		}
 	]
 	
 	return (
-		<div className="toolbar flex flex-col justify-between h-screen w-1/4 bg-beige z-50">
+		<div className="toolbar flex flex-col justify-between h-screen w-1/4 min-w-[375px] bg-beige z-50">
 
 			<div className="Banner flex justify-start mt-8 ">
 				<div className="relative w-full">

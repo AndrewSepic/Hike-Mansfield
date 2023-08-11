@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import mansfieldTrails from "../trails/mansfield-trail-lines.json"
-import camelsHumpTrails from "../trails/camels-hump-trails.json"
+import camelsHumpTrails from "../trails/camels-hump-trails"
+import mansfieldTrails  from "../trails/mansfield-trail-lines"
 import Trail from './Trail'
 import createTrails from "../utils/mapbox-functions"
-import animateIn  from "../utils/animateIn"
+import { animateIn }  from "../utils/animateIn"
 import mapboxGl from "mapbox-gl"
 
 
@@ -32,6 +32,8 @@ const TrailListing = ({activePeak, mapRef }) => {
 			trailsArray = mansfieldTrails.features
 		} else if (activePeak == 1) {
 			trailsArray = camelsHumpTrails.features
+		} else if (activePeak == 2 || activePeak == 3) {
+			alert("There are no trails loaded for this mountain yet")
 		}
 		// Mapbox magic happens here - Creates trails & returns array of trails with generated colors
 		const trailData = createTrails(trailsArray, mapRef)
